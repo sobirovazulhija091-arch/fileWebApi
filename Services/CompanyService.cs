@@ -11,7 +11,7 @@ public class CompanyService(ApplicationDbContext dbContext) : ICompanyService
         try
         {
              using var  context = _dbContext.Connection();
-             var query="insert into(name,description) values(@name,@description)";
+             var query="insert into companies(name,description) values(@name,@description)";
              var result = context.Execute(query, new{name=company.Name,description=company.Description});
              return result==0?
               new Response<string>(HttpStatusCode.InternalServerError,"Company data  not added!")
