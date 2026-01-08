@@ -83,5 +83,29 @@ public class CompanyService(ApplicationDbContext dbContext) : ICompanyService
          return new Response<string>(HttpStatusCode.InternalServerError,"Internal Server Error");
        }
     }
-
+      public  async Task<int> GetCountCompanyAsync()
+  {
+           using var conn= _dbContext.Connection();
+           var query="select count(*) from companies ";
+           var count = await conn.ExecuteScalarAsync<int>(query);
+            return count;
+  }
+    public async Task<Response<string>> DeleteDesAsync(string namecompany)
+  {
+    try
+    {
+      using var conn = _dbContext.Connection();
+         var query ="delete from companies where name=@Name";
+          var res = await conn.ExecuteAsync(query,new{Name=namecompany});
+          return res==0?  new Response<string>(HttpStatusCode.NotFound,"Company name not found") :
+          new Response<string>(HttpStatusCode.OK,"Company deleted successfully!");
+    }
+    catch (System.Exception ex)
+    {
+        Console.WriteLine(ex);
+        return new Response<string>(HttpStatusCode.InternalServerError,"Internal Server Error");
+    }
+        
+  }
+   
 }

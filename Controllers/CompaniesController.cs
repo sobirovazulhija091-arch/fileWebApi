@@ -38,5 +38,15 @@ public class CompaniesController(ICompanyService companyService) : ControllerBas
     {
         return await _companyService.DeleteAsync(comapanyid);
     }
+    [HttpGet("count")]
+     public  async Task<int> GetCountCompanyAsync()
+    {
+         return await _companyService.GetCountCompanyAsync();
+    }
+     [HttpDelete("namecompany:string")]
+    public async Task<Response<string>> DeleteDesAsync(string namecompany)
+    {
+         return await _companyService.DeleteDesAsync(namecompany);
+    }
 }
 
