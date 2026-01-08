@@ -1,10 +1,10 @@
 using WebApi.Entities;
 public interface ICompanyService
 {
-    List<Company> GetCompanies();
-    Response<Company?> GetCompaniesById(int companyid);
-     Response<string> Add(Company company);
-     Response<string> Update(Company model);
-     Response<string> Delete(int companyid);
+    Task<List<Company>> GetCompaniesAsync();
+    Task<Response<Company?>> GetCompaniesByIdAsync(int companyid);
+     Task<Response<string>> AddAsync(Company company);
+     Task<Response<string>> UpdateAsync(Company model);
+     Task<Response<string>> DeleteAsync(int companyid);
 }
 

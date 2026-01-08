@@ -4,6 +4,7 @@
 using WebApi.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
 
 
 [Route("api/[controller]")]
@@ -12,30 +13,30 @@ public class CompaniesController(ICompanyService companyService) : ControllerBas
 {
     private readonly ICompanyService _companyService = companyService;
   [HttpGet]
-  public List<Company> GetCompanies()
+  public async Task<List<Company>> GetCompaniesAsync()
     {
-        return _companyService.GetCompanies();
+        return await _companyService.GetCompaniesAsync();
     }
     [HttpGet("{companyid:int}")]
-    public Response<Company?> GeCompanyByid(int companyid)
+    public async Task<Response<Company?>> GeCompanyByidAsync(int companyid)
     {
-         return _companyService.GetCompaniesById(companyid);
+         return await _companyService.GetCompaniesByIdAsync(companyid);
     }
     [HttpPost]
-    public Response<string> Add(Company company)
+    public async Task<Response<string>> AddAsync(Company company)
     {
-        return _companyService.Add(company);
+        return await _companyService.AddAsync(company);
     }
     [HttpPut]
-    public Response<string> Update(Company model)
+    public async Task<Response<string>> UpdateAsync(Company model)
     {
-        return _companyService.Update(model);
+        return await _companyService.UpdateAsync(model);
     }
     
     [HttpDelete("{comapanyid:int}")]
-    public Response<string> Delete(int comapanyid)
+    public async Task<Response<string>> DeleteAsync(int comapanyid)
     {
-        return _companyService.Delete(comapanyid);
+        return await _companyService.DeleteAsync(comapanyid);
     }
 }
 
